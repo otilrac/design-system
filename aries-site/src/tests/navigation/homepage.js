@@ -27,4 +27,3 @@ test('should navigate to correct path when a tile is choosen via keyboard', asyn
     .expect(getLocation())
     .contains(expectedPath);
 });
-
