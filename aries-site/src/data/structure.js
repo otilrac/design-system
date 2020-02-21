@@ -81,7 +81,7 @@ export const structure = [
     icon: size => <IconDesign size={size} />,
     seoDescription:
       'View patterns, interactions, and other best practices for how to succeed using resources included with the HPE Design System.',
-    pages: [],
+    pages: ['Form Patterns', 'Form Interaction'],
   },
   {
     name: 'Resources',
@@ -214,6 +214,33 @@ export const structure = [
       'TextArea',
       'TextInput',
       'Form',
+    ],
+  },
+  {
+    name: 'Form Patterns',
+    description:
+      'Lorem ipsum dolor amet shabby chic marfa pug, artisan semiotics shaman wayfarers yuccie poke brooklyn selvage kombucha tilde deep v small batch.',
+    icon: size => <IconBrand size={size} />,
+    seoDescription: '',
+    sections: [
+      'Sign In',
+      'Account Creation',
+      'Manage User',
+      'In-App Configuration',
+    ],
+  },
+  {
+    name: 'Form Interaction',
+    description:
+      'Lorem ipsum dolor amet shabby chic marfa pug, artisan semiotics shaman wayfarers yuccie poke brooklyn selvage kombucha tilde deep v small batch.',
+    icon: size => <IconBrand size={size} />,
+    seoDescription: '',
+    sections: [
+      'Anatomy',
+      'States',
+      'Spacing',
+      'Interactions',
+      'Visual Specifications',
     ],
   },
 ];
