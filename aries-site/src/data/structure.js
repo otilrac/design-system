@@ -81,7 +81,7 @@ export const structure = [
     icon: size => <IconDesign size={size} />,
     seoDescription:
       'View patterns, interactions, and other best practices for how to succeed using resources included with the HPE Design System.',
-    pages: ['Form Patterns', 'Form Interaction'],
+    pages: ['Form Templates', 'Form Interaction'],
   },
   {
     name: 'Resources',
@@ -217,7 +217,7 @@ export const structure = [
     ],
   },
   {
-    name: 'Form Patterns',
+    name: 'Form Templates',
     description:
       'Lorem ipsum dolor amet shabby chic marfa pug, artisan semiotics shaman wayfarers yuccie poke brooklyn selvage kombucha tilde deep v small batch.',
     icon: size => <IconBrand size={size} />,

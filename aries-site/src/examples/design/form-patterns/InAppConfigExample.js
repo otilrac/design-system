@@ -58,7 +58,7 @@ const SaveUserButton = () => {
 };
 
 export const InAppConfigExample = () => {
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
   const [formValues, setFormValues] = useState(intialFormValues);
 
   const closeLayer = () => setIsOpen(undefined);

@@ -5,7 +5,7 @@ import { ContentSection, Layout, Subsection, Example } from '../../layouts';
 import { InAppConfigExample } from '../../examples';
 import { getPageDetails } from '../../utils';
 
-const title = 'Form Interaction';
+const title = 'Form Templates';
 const page = getPageDetails(title);
 const topic = 'Design';
 
@@ -14,7 +14,7 @@ const FormInteraction = () => (
     <Meta
       title={title}
       description={page.seoDescription}
-      canonicalUrl="https://design-system.hpe.design/design/forms"
+      canonicalUrl="https://design-system.hpe.design/design/form-templates"
     />
     <ContentSection>
       <Subsection name={title} level={1} topic={topic}>
@@ -36,24 +36,24 @@ const FormInteraction = () => (
     <ContentSection>
       <Subsection name="Account Creation">
         <SubsectionText>
-          Lorem ipsum dolor amet wolf humblebrag pork belly, +1 four dollar
-          toast.
+          Allow users to get started quickly, while obtaining the minimum
+          information needed to serve them. Account creation form flows capture
+          data in a bite-sized, focussed manner. This form flow is designed to
+          reduce cognitive load by grouping like information together and
+          presenting only mission critical input fields.
         </SubsectionText>
       </Subsection>
     </ContentSection>
     <ContentSection>
       <Subsection name="In-App Configuration">
+        <SubsectionText>
+          Managing devices, servers, or users? In-app configuration forms
+          provide users easy access to view and apply an item's settings &mdash;
+          immediately returning them to where they left off in their workflow.
+        </SubsectionText>
         <Example>
           <InAppConfigExample />
         </Example>
-      </Subsection>
-    </ContentSection>
-    <ContentSection>
-      <Subsection name="Manage User">
-        <SubsectionText>
-          Lorem ipsum dolor amet wolf humblebrag pork belly, +1 four dollar
-          toast.
-        </SubsectionText>
       </Subsection>
     </ContentSection>
     <ContentSection>
