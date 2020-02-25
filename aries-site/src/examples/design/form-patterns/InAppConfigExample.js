@@ -1,18 +1,23 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import {
   Box,
   Button,
   CheckBox,
+  Footer,
   Form,
   FormField,
   Header,
   Heading,
   Layer,
   Main,
+  Text,
   TextInput,
   ThemeContext,
 } from 'grommet';
-import { Close } from 'grommet-icons';
+import { Close, PersonalComputer } from 'grommet-icons';
+
+import { Identifier, Tile } from 'aries-core';
 
 const userPermissions = [
   'Select All',
@@ -44,26 +49,8 @@ const intialFormValues = {
   'Recover Mode': false,
 };
 
-const SaveUserButton = () => {
-  return (
-    <Button
-      label="Save User Information"
-      margin={{ vertical: 'medium' }}
-      onSubmit={() => {}}
-      primary
-      size="small"
-      type="submit"
-    />
-  );
-};
-
-export const InAppConfigExample = () => {
-  const [isOpen, setIsOpen] = useState(false);
+const ManageUserForm = () => {
   const [formValues, setFormValues] = useState(intialFormValues);
-
-  const closeLayer = () => setIsOpen(undefined);
-
-  const displayLayer = () => setIsOpen(true);
 
   const onFormChange = values => {
     setFormValues(values);
@@ -78,12 +65,117 @@ export const InAppConfigExample = () => {
   };
 
   return (
-    <>
-      <ThemeContext.Extend value={{ layer: { background: '' } }}>
-        <Box align="start">
+    <Form
+      onChange={onFormChange}
+      onReset={() => {}}
+      onSubmit={onSave}
+      validate="blur"
+      value={formValues}
+    >
+      <Heading level={3} size="small">
+        Account Information
+      </Heading>
+      <FormField name="email" label="Email" component={TextInput} />
+      <FormField
+        name="displayName"
+        label="Display Name"
+        component={TextInput}
+      />
+      <FormField
+        name="resetPassword"
+        label="Reset Password"
+        component={CheckBox}
+      />
+      <FormField
+        name="serviceAccount"
+        label="Service Account"
+        component={CheckBox}
+      />
+      <SaveUserButton />
+      <Heading level={3} size="small">
+        Session Services
+      </Heading>
+      {userPermissions &&
+        userPermissions.map(permission => {
+          return (
+            <FormField
+              component={CheckBox}
+              key={permission}
+              name={permission}
+              label={permission}
+              reverse
+              align="end"
+              toggle
+            />
+          );
+        })}
+      <SaveUserButton />
+    </Form>
+  );
+};
+
+const SaveUserButton = () => {
+  return (
+    <Button
+      label="Save User Information"
+      margin={{ vertical: 'medium' }}
+      onSubmit={() => {}}
+      primary
+      size="small"
+      type="submit"
+    />
+  );
+};
+
+const UserDetailExample = ({ displayLayer }) => {
+  return (
+    <Main background="background-back" pad="large">
+      <Tile
+        alignContent="center"
+        background="blue"
+        height="medium"
+        width="medium"
+        onClick={displayLayer}
+      >
+        <Identifier
+          title="lozzi@hpe.com"
+          subTitle="10.68.229.0"
+          direction="column"
+          align="start"
+          gap="small"
+          pad={{ horizontal: 'medium', vertical: 'medium' }}
+          size="xlarge"
+        >
+          <PersonalComputer size="xlarge" />
+        </Identifier>
+        <Box flex />
+        <Footer background="background-contrast" pad="medium">
+          <Box direction="row" gap="small">
+            <Box
+              round
+              margin={{ vertical: 'xsmall' }}
+              pad={{ horizontal: 'xsmall' }}
+              background="status-warning"
+            />
+            <Text weight="bold">Expired</Text>
+          </Box>
           <Button label="Manage User" onClick={displayLayer} primary />
-        </Box>
-        {isOpen && (
+        </Footer>
+      </Tile>
+    </Main>
+  );
+};
+
+export const InAppConfigExample = () => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const closeLayer = () => setIsOpen(undefined);
+
+  return (
+    <>
+      <UserDetailExample displayLayer={setIsOpen} />
+      {isOpen && (
+        <ThemeContext.Extend value={{ layer: { background: '' } }}>
           <Layer
             full="vertical"
             position="right"
@@ -95,9 +187,13 @@ export const InAppConfigExample = () => {
               background="background-front"
               fill="vertical"
               round={{ corner: 'left', size: 'large' }}
-              overflow="scroll"
             >
-              <Header direction="column" align="start" pad="medium">
+              <Header
+                direction="column"
+                align="start"
+                elevation="xsmall"
+                pad="medium"
+              >
                 <Button icon={<Close />} onClick={closeLayer} alignSelf="end" />
                 <Heading
                   level={2}
@@ -106,58 +202,17 @@ export const InAppConfigExample = () => {
                   Manage User
                 </Heading>
               </Header>
-              <Main pad="large" width="large">
-                <Form
-                  onChange={onFormChange}
-                  onReset={() => {}}
-                  onSubmit={onSave}
-                  validate="blur"
-                  value={formValues}
-                >
-                  <Heading level={3} size="small">
-                    Account Information
-                  </Heading>
-                  <FormField name="email" label="Email" component={TextInput} />
-                  <FormField
-                    name="displayName"
-                    label="Display Name"
-                    component={TextInput}
-                  />
-                  <FormField
-                    name="resetPassword"
-                    label="Reset Password"
-                    component={CheckBox}
-                  />
-                  <FormField
-                    name="serviceAccount"
-                    label="Service Account"
-                    component={CheckBox}
-                  />
-                  <SaveUserButton />
-                  <Heading level={3} size="small">
-                    Session Services
-                  </Heading>
-                  {userPermissions &&
-                    userPermissions.map(permission => {
-                      return (
-                        <FormField
-                          component={CheckBox}
-                          key={permission}
-                          name={permission}
-                          label={permission}
-                          reverse
-                          align="end"
-                          toggle
-                        />
-                      );
-                    })}
-                  <SaveUserButton />
-                </Form>
+              <Main flex pad="large" width="large">
+                <ManageUserForm closeLayer={closeLayer} />
               </Main>
             </Box>
           </Layer>
-        )}
-      </ThemeContext.Extend>
+        </ThemeContext.Extend>
+      )}
     </>
   );
+};
+
+UserDetailExample.propTypes = {
+  displayLayer: PropTypes.func,
 };
