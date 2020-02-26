@@ -49,7 +49,7 @@ const intialFormValues = {
   'Recover Mode': false,
 };
 
-const ManageUserForm = () => {
+const ManageUserForm = ({ closeLayer }) => {
   const [formValues, setFormValues] = useState(intialFormValues);
 
   const onFormChange = values => {
@@ -62,6 +62,7 @@ const ManageUserForm = () => {
     // If success, display success
     // eslint-disable-next-line no-alert
     alert('Success! \n User information saved.');
+    closeLayer(false);
   };
 
   return (
@@ -203,7 +204,7 @@ export const InAppConfigExample = () => {
                 </Heading>
               </Header>
               <Main flex pad="large" width="large">
-                <ManageUserForm closeLayer={closeLayer} />
+                <ManageUserForm closeLayer={setIsOpen} />
               </Main>
             </Box>
           </Layer>
@@ -211,6 +212,10 @@ export const InAppConfigExample = () => {
       )}
     </>
   );
+};
+
+ManageUserForm.propTypes = {
+  closeLayer: PropTypes.func,
 };
 
 UserDetailExample.propTypes = {
